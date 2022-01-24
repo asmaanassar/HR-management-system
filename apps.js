@@ -30,7 +30,7 @@ function getRndInteger(min, max){
 }
 
 employee.prototype.render = function(){
-    document.write(`<p> ${this.fullName} the salary: ${this.newSalary()}</P>`)
+    document.write(`<p> ${this.fullName} the salary: ${this.newSalary()}</P>`);
 }
 
 const ghaziSamer = new employee ('1000', 'Ghazi Samer', 'Administration', 'Senior');
