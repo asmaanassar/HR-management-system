@@ -5,7 +5,7 @@ function employee(employeeID, fullName, department, level) {
     this.fullName = fullName;
     this.department = department;
     this.level = level;
-    this.imagePath = './image/${this.name}.png';
+    //this.imagePath = './image/${this.name}.png';
     this.salary = 0;
 }
 
