@@ -65,15 +65,6 @@ Employee.prototype.render = function () {
     p3.textContent= `${this.salary}`
 
 }
-// function generateUniqId(num)
-// {
-// let n = 1;
-// let string = "" + num;
-// let pad = "0000";
-// n= pad.substring(0, pad.length-string.length)+ string;
-// num++;
-//     return n;
-// }
 
 function handelSubmit(event){
     event.preventDefault();
