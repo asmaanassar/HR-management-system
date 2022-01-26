@@ -1,29 +1,27 @@
 'use strict';
 
-
-
-function employee(employeeID, fullName, department, level, salary) {
+function employee(employeeID, fullName, department, level) {
     this.employeeID = employeeID;
     this.fullName = fullName;
     this.department = department;
     this.level = level;
-    this.imagePath = './pic/${this.name}.png';
-    this.salary = salary;
+    this.imagePath = './image/${this.name}.png';
+    this.salary = 0;
 }
 
 
 employee.prototype.newSalary = function () {
-    let clSalary;
+    let netSalary;
     if (this.level == 'Senior') {
-        clSalary = getRndInteger(1500, 2000);
+        this.salary = getRndInteger(1500, 2000);
     } else if (this.level == 'Mid-Senior') {
-        clSalary = getRndInteger(1000, 1500);
+        this.salary = getRndInteger(1000, 1500);
     } else if (this.level == 'Junior') {
-        clSalary = getRndInteger(500, 1000);
+        this.salary = getRndInteger(500, 1000);
     }
 
-    clSalary = clSalary - (clSalary * 0.075);
-    return clSalary;
+    netSalary = this.salary - (this.salary * 0.075);
+    return netSalary;
 }
 
 
