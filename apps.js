@@ -5,20 +5,20 @@
 let employeeForm = document.getElementById('employeeForm');
 let employeeSec = document.getElementById('employee');
 
-function employee(employeeID, fullName, department, level, salary) {
+function Employee(employeeID, fullName, department, level,imgurl) {
     this.employeeID = employeeID;
     this.fullName = fullName;
     this.department = department;
     this.level = level;
-    this.imagePath = `./pic/${this.fullName}.jpg`;
-    this.salary = salary;
+    this.imgurl = imgurl;  
+    this.salary = 0;
 }
 
-employee.prototype.newEmployeeID = function(){
+Employee.prototype.newEmployeeID = function(){
     this.employeeID = getRndInteger(1000,9999);
 }
 
-employee.prototype.newSalary = function () {
+Employee.prototype.newSalary = function () {
     
     if (this.level == 'Senior') {
         this.salary = getRndInteger(1500, 2000);
@@ -31,16 +31,27 @@ employee.prototype.newSalary = function () {
 }
 
 
-employee.prototype.render = function () {
-    
+Employee.prototype.render = function () {
     let div = document.createElement('div');
     employeeSec.appendChild(div);
+
 
     let img = document.createElement('img');
     div.appendChild(img);
     img.setAttribute('src',this.imagePath);
-    img.setAttribute('alt',this.fullName);
+    img.setAttribute('alt',this.name);
 
+    // let img = document.createElement('img');
+    // div.appendChild(img);
+    // img.setAttribute('src',this.imgurl);
+    // img.setAttribute('alt',this.fullName);
+//     if(this.imgurl != ''){
+//     img.setAttribute('src',this.imgurl);
+//     img.setAttribute('alt',this.fullName);
+//  }else{
+//       img.setAttribute('src', this.imgurl);
+//     img.setAttribute('alt',this.fullName);
+//     // }
     let p = document.createElement('p');
     div.appendChild(p);
     p.textContent = `Name: ${this.fullName} - ID: ${this.employeeID}`
@@ -54,7 +65,15 @@ employee.prototype.render = function () {
     p3.textContent= `${this.salary}`
 
 }
-
+// function generateUniqId(num)
+// {
+// let n = 1;
+// let string = "" + num;
+// let pad = "0000";
+// n= pad.substring(0, pad.length-string.length)+ string;
+// num++;
+//     return n;
+// }
 
 function handelSubmit(event){
     event.preventDefault();
@@ -62,18 +81,31 @@ function handelSubmit(event){
 
     let department = event.target.department.value;
 
-     let level = event.target.level.value;
+    let level = event.target.level.value;
     
-    let newEmplouee = new employee(0,fullName, department, level);
+    let imgurl = event.target.imgurl.value;
+    ///
+    //let id = generateUniqId();
+
+    let newEmplouee = new Employee(fullName, department, level, imgurl);
 
     newEmplouee.newEmployeeID();
     newEmplouee.newSalary();
+    //svae to local storage
     newEmplouee.render();
 }
-
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+// function generateUniqId(num)
+//  {
+//  let n = 1;
+//  let string = " " + num;
+// let pad = "0000";
+//  n= pad.substring(0, pad.length-string.length)+ string;
+//  num++;
+//      return n;
+// }
 
-employeeForm.addEventListener('submit', handelSubmit);
+employeeForm.addEventListener('submit', handelSubmit)
