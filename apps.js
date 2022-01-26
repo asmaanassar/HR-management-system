@@ -10,7 +10,7 @@ function Employee(employeeID, fullName, department, level,imgurl) {
     this.fullName = fullName;
     this.department = department;
     this.level = level;
-    this.imgurl = `./images/${this.name}.PNG`;  
+    this.imgurl = imgurl;  
     this.salary = 0;
 }
 
