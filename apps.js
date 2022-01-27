@@ -34,7 +34,7 @@ Employee.prototype.render = function () {
     document.write(`<p> ${this.fullName} the salary: ${this.newSalary()} </p>`)
 }
 
-const ghaziSamer = new Employee('1000', 'Ghazi Samer', 'Administration', 'Senior', );
+const ghaziSamer = new Employee('1000', 'Ghazi Samer', 'Administration', 'Senior',);
 ghaziSamer.render();
 
 const lanaAli = new Employee('1001', 'Lana Ali', 'Finance', 'Senior');
