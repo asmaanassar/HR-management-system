@@ -13,13 +13,26 @@ checkLocalAndPush();
 
 function Employee(employeeID, fullName, department, level, salary) {
 
-function Employee(employeeID, fullName, department, level,imgurl) {
 
+function Employee(employeeID, fullName, department, level, imgurl, salary) {
+
+function Employee(employeeID, fullName, department, level,imgurl) {
 
     this.employeeID = employeeID;
     this.fullName = fullName;
     this.department = department;
     this.level = level;
+
+    this.imgurl = imgurl;
+    this.salary = 0;
+}
+
+Employee.prototype.newEmployeeID = function () {
+    this.employeeID = getRndInteger(1000, 9999);
+}
+
+Employee.prototype.newSalary = function () {
+    let netsalary;
 
     //this.imagePath = './image/${this.name}.png';
     this.salary = 0;
@@ -65,6 +78,10 @@ Employee.prototype.newSalary = function () {
         this.salary = getRndInteger(500, 1000);
     }
 
+
+    netsalary = this.salary - (this.salary * 0.075);
+    return netsalary;
+
 }
 
 
@@ -109,6 +126,37 @@ Employee.prototype.render = function () {
 
     let img = document.createElement('img');
     div.appendChild(img);
+
+    if(this.imgurl != ''){
+    img.setAttribute('src',this.imgurl);
+    img.setAttribute('alt',this.fullName);
+    }else{
+        img.setAttribute('src',`./photo/${this.fullName}.jpg`);
+        img.setAttribute('alt',this.fullName);
+    }
+
+    let p1 = document.createElement('p');
+    div.appendChild(p1);
+    p1.textContent = `Name: ${this.fullName}`
+
+    let p2 = document.createElement('p');
+    div.appendChild(p2);
+    p2.textContent = `ID: ${this.employeeID}`
+
+    let p3 = document.createElement('p');
+    div.appendChild(p3);
+    p3.textContent = `Depertment: ${this.department}`
+
+
+    let p4 = document.createElement('p');
+    div.appendChild(p4);
+    p4.textContent = `Level: ${this.level}`
+
+
+    let p5 = document.createElement('p');
+    div.appendChild(p5);
+    p5.textContent = `${this.salary}`
+
     img.setAttribute('src',this.imagePath);
     img.setAttribute('alt',this.name);
 
@@ -134,17 +182,8 @@ Employee.prototype.render = function () {
     netSalary = netSalary - (netSalary * 0.075);
     return netSalary;
 
-}
-// function generateUniqId(num)
-// {
-// let n = 1;
-// let string = "" + num;
-// let pad = "0000";
-// n= pad.substring(0, pad.length-string.length)+ string;
-// num++;
-//     return n;
-// }
 
+}
 
 function handelSubmit(event) {
     event.preventDefault();
@@ -163,16 +202,16 @@ function handelSubmit(event) {
     render (readFormatLocal());
 
     
+
     let imgurl = event.target.imgurl.value;
-    ///
-    //let id = generateUniqId();
+
 
     let newEmplouee = new Employee(fullName, department, level, imgurl);
+    newEmplouee.render();
 
 
     newEmplouee.newEmployeeID();
     newEmplouee.newSalary();
-    //svae to local storage
     newEmplouee.render();
 }
 
