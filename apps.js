@@ -5,13 +5,13 @@
 let employeeForm = document.getElementById('employeeForm');
 let employeeSec = document.getElementById('employee');
 
-function Employee(employeeID, fullName, department, level,imgurl) {
+function Employee(employeeID, fullName, department, level,imgurl,salary) {
     this.employeeID = employeeID;
     this.fullName = fullName;
     this.department = department;
     this.level = level;
     this.imgurl = imgurl;  
-    this.salary = 0;
+    this.salary = salary;
 }
 
 Employee.prototype.newEmployeeID = function(){
@@ -19,6 +19,7 @@ Employee.prototype.newEmployeeID = function(){
 }
 
 Employee.prototype.newSalary = function () {
+    let netsalary;
     
     if (this.level == 'Senior') {
         this.salary = getRndInteger(1500, 2000);
@@ -27,7 +28,9 @@ Employee.prototype.newSalary = function () {
     } else if (this.level == 'Junior') {
         this.salary = getRndInteger(500, 1000);
     }
-    
+
+    netsalary= this.salary-(this.salary * 0.075);
+    return netsalary;
 }
 
 
@@ -36,12 +39,12 @@ Employee.prototype.render = function () {
     employeeSec.appendChild(div);
 
 
-    let img = document.createElement('img');
-    div.appendChild(img);
-    img.setAttribute('src',this.imagePath);
-    img.setAttribute('alt',this.name);
+     let img = document.createElement('img');
+     div.appendChild(img);
+     img.setAttribute('src',this.imagePath);
+     img.setAttribute('alt',this.name);
 
-    // let img = document.createElement('img');
+    //let img = document.createElement('img');
     // div.appendChild(img);
     // img.setAttribute('src',this.imgurl);
     // img.setAttribute('alt',this.fullName);
@@ -52,6 +55,7 @@ Employee.prototype.render = function () {
 //       img.setAttribute('src', this.imgurl);
 //     img.setAttribute('alt',this.fullName);
 //     // }
+
     let p = document.createElement('p');
     div.appendChild(p);
     p.textContent = `Name: ${this.fullName} - ID: ${this.employeeID}`
@@ -75,14 +79,13 @@ function handelSubmit(event){
     let level = event.target.level.value;
     
     let imgurl = event.target.imgurl.value;
-    ///
-    //let id = generateUniqId();
+
 
     let newEmplouee = new Employee(fullName, department, level, imgurl);
+    newEmplouee.render();
 
     newEmplouee.newEmployeeID();
     newEmplouee.newSalary();
-    //svae to local storage
     newEmplouee.render();
 }
 
